@@ -72,7 +72,7 @@
                 You have {{tc.todos.length}} todos, of which {{tc.done.length}} are done.
               </div>
               <div class="pull-right">
-                <button class="btn btn-small" data-ng-click="tc.delCompleted()">Delete Completed</button>
+                <button class="btn btn-small btn-warning" data-ng-disabled="tc.done.length < 1" data-ng-click="tc.delCompleted()">Delete Completed</button>
               </div>
             </div>
           </div>
