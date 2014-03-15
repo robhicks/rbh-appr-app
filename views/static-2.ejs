@@ -24,7 +24,6 @@
                   <option value="true">Completed</option>
                 </select>
               </div>
-
             </div>
             <div class="panel-body">
               <form novalidate>
@@ -39,6 +38,9 @@
                   />
                 </div>
               </form>
+              <div data-ng-cloak class="alert alert-warning" style="margin-top: -20px" data-ng-if="tc.tooShort">
+                A good todo name has to be more than 2 characters.
+              </div>
               <div data-ng-cloak class="row" data-ng-repeat="todo in tc.todos | filter:tc.filter">
                 <div class="col-lg-1 col-md-1 col-sm-1 checkboxes">
                   <input
@@ -63,6 +65,14 @@
                   <span class="glyphicon glyphicon-ok pointer" data-ng-if="todo.editing" data-ng-click="tc.edit($index)" title="edit"></span>
                   <span class="glyphicon glyphicon-trash pointer" data-ng-if="!todo.editing" data-ng-click="tc.del($index)" title="delete"></span>
                 </div>
+              </div>
+            </div>
+            <div class="panel-footer clearfix">
+              <div class="pull-left">
+                You have {{tc.todos.length}} todos, of which {{tc.done.length}} are done.
+              </div>
+              <div class="pull-right">
+                <button class="btn btn-small" data-ng-click="tc.delCompleted()">Delete Completed</button>
               </div>
             </div>
           </div>
