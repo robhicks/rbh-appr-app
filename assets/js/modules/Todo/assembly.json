@@ -1,5 +1,6 @@
 {
   "files":[
+      "angular-local-storage.js",
       "TodoModule.js",
       "directives.js",
       "TodoCtrl.js",

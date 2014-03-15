@@ -1,1 +1,1 @@
-var app = angular.module('TodoModule', []);
+var app = angular.module('TodoModule', ['LocalStorageModule']);
