@@ -10,9 +10,9 @@ app.controller('TodoCtrl', ['$scope', function($scope){
   self.edit = function(idx){
     todo = self.todos[idx];
     for (var i = 0; i < self.todos.length; i++){
-      self.todos[i].editing = false;
+      if(i === idx) todo.editing = todo.editing ? false : true;
+      else self.todos[i].editing = false;
     }
-    todo.editing = true;
   };
 
   self.update = function(idx){

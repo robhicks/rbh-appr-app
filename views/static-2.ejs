@@ -40,7 +40,7 @@
                 </div>
               </form>
               <div data-ng-cloak class="row" data-ng-repeat="todo in tc.todos | filter:tc.filter">
-                <div class="col-lg-1 col-md-1 col-sm-1">
+                <div class="col-lg-1 col-md-1 col-sm-1 checkboxes">
                   <input
                     type="checkbox"
                     data-ng-model="todo.complete"/>
@@ -59,8 +59,9 @@
                   <div class="not-editing" data-ng-class="{complete: todo.complete}" data-ng-if="!todo.editing">{{todo.name}}</div>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2 actions">
-                  <span class="glyphicon glyphicon-pencil pointer" data-ng-click="tc.edit($index)" title="edit"></span>
-                  <span class="glyphicon glyphicon-trash pointer" data-ng-click="tc.del($index)" title="delete"></span>
+                  <span class="glyphicon glyphicon-pencil pointer" data-ng-if="!todo.editing" data-ng-click="tc.edit($index)" title="edit"></span>
+                  <span class="glyphicon glyphicon-ok pointer" data-ng-if="todo.editing" data-ng-click="tc.edit($index)" title="edit"></span>
+                  <span class="glyphicon glyphicon-trash pointer" data-ng-if="!todo.editing" data-ng-click="tc.del($index)" title="delete"></span>
                 </div>
               </div>
             </div>
