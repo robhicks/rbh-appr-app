@@ -1,0 +1,8 @@
+{
+  "files":[
+      "TodoModule.js",
+      "directives.js",
+      "TodoCtrl.js",
+      "main.js"
+  ]
+}

@@ -1,14 +1,15 @@
-<% page = { 'title' : 'PAGE_TITLE', 'key': 'INDEX_PAGE_NAME'} %>
-<% assets = { 'css' : [], 'js' : [] } %>
-<div id="main" class="experiments">
+<% page = { 'title' : 'Hello Frontier', 'key': 'INDEX_PAGE_NAME'} %>
+<% assets = { 'css' : ['index.styl'], 'js' : [] } %>
+<div id="home" class="container">
   <div class="no-layout">
-    <h1 class="font21 serif"><%- t('welcome_title')%></h1>
+    <h1 class="font21 serif"><%- i18n('welcome_title')%></h1>
     <section class="basic">
       <p>
-        <%- t('welcome_message')%> <img src="<%= img('icon/arrow_left_white_11x11.png') %>" alt="">
+        <%- i18n('welcome_message')%> <img src="<%= img('icon/arrow_left_white_11x11.png') %>" alt="">
       </p>
-
-      <a href="sample" class="btn btn-water"><%- t('sample_link')%></a>
+      <p>
+        Here is some data passed to EJS: <strong class="red"><%= data %></strong>
+      </p>
     </section>
   </div>
 </div>

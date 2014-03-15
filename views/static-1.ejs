@@ -1,0 +1,12 @@
+<% page = { 'title' : 'Hello Frontier - Static Page 1', 'key': 'INDEX_PAGE_NAME'} %>
+<% assets = { 'css' : ['index.styl'], 'js' : [] } %>
+<div id="static-1" class="container">
+  <div class="no-layout">
+    <h1 class="font21 serif"><%- i18n('static_1_title')%></h1>
+    <section class="basic">
+      <p>
+        <%- i18n('static_1_message')%> <img src="<%= img('icon/arrow_left_white_11x11.png') %>" alt="">
+      </p>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,231 @@
+<% include ../node_modules/theme-engage/views/partials/macros %>
+<!doctype html>
+<!--[if IE 8]>
+<html<% if(SMITH) { %> data-ng-app="<%- appName %>"<% } %> class="ie8">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html>
+<!--<![endif]-->
+
+<head>
+  <% if(feature("appDynamicsEx")) { %>
+    <script>window["adrum-app-key"] = "<%- process.env.APPDYNAMICS_EUM_KEY %>"</script>
+    <script>window["adrum-start-time"] = new Date().getTime();</script>
+  <% } %>
+
+  <% if( (feature("boomrRum")) ) { %>
+    <% include ../node_modules/theme-engage/views/partials/rum_ut.ejs %>
+  <% } %>
+
+  <link href="https://edge.fscdn.org/assets/docs/fs_logo_favicon.ico" rel="icon" type="image/x-icon" />
+  <% if (feature("chromeFrameExperiment")) { %>
+    <% include ../node_modules/theme-engage/views/partials/meta %>
+
+    <title data-ng-bind="page.title+' &#8212; FamilySearch.org'"><%- page.title ? page.title+" &#8212; " : "" %>FamilySearch.org</title>
+
+  <% if(feature("clickTaleHomeOnlyEx")){ %>
+    <%- js('clickTale.js') %>
+  <% } %>
+
+  <% } else { %>
+    <title data-ng-bind="page.title+' &#8212; FamilySearch.org'"><%- page.title ? page.title+" &#8212; " : "" %>FamilySearch.org</title>
+
+      <% if(feature("clickTaleHomeOnlyEx")){ %>
+    <%- js('clickTale.js') %>
+  <% } %>
+
+    <% include ../node_modules/theme-engage/views/partials/meta %>
+  <% } %>
+
+
+  <% if(!SMITH) { %>
+    <% if (feature('bootstrap232')) { %>
+      <%- css('2.3.2/bootstrap.css') %>
+      <%- css('2.3.2/bootstrap-responsive.css') %>
+    <% } else if(feature('bootstrap3')){ %>
+      <%- css('3.0.0/bootstrap.min.css') %>
+      <%- css('3.0.0/bootstrap-theme.min.css') %>
+		<% } else { %>
+      <%- css({all:'bootstrap.css'}) %>
+      <%- css('responsive.css') %>
+    <% } %>
+    <%- css({all:'layout/theme-engage.css'}) %>
+    <%- css('pure-min.css') %>
+  <% } %>
+
+  <% if(assets.css) { %>
+    <% for(var i=0, l=assets.css.length; i<l; i++) { %>
+      <%- css(assets.css[i]) %>
+    <% } %>
+  <% } %>
+
+  <!--[if lte IE 8]>
+    <script src="https://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+    <%- js("html5shiv-printshiv.js") %>
+  <![endif]-->
+
+  <% if(!SMITH) { %>
+
+    <% if (feature('jQuery191')){ %>
+      <%- js('jquery-1.9.1.min.js') %>
+      <% if(feature('jQueryMigrate')) { %>
+        <% if(feature('jQueryMigrateDebug')) { %>
+          <%- js('jquery-migrate-1.2.1.js') %>
+        <% } else { %>
+          <%- js('jquery-migrate-1.2.1.min.js') %>
+        <% } %>
+      <% } %>
+
+    <% } else { %>
+      <%- js('jquery-1.8.2.min.js') %>
+    <% } %>
+
+    <% if(feature("injectFiveTwo")) { %>
+      <%- js('inject_0.5.2.js') %>
+    <% } else { %>
+      <%- js('inject_0.4.0_a.js') %>
+    <% } %>
+
+    <% if(page.loadGadget){ %>
+      <script src="/gadgetrepo/org/familysearch/gadget/gadget-core/1.x/gadget-core.js"></script>
+    <% } %>
+
+    <%- js('base.js') %>
+
+    <% if(page.mbox || feature('mBoxAlwaysOnEx')) { %>
+      <%- js('mbox-0.2.js') %>
+    <% } %>
+  <% } %>
+</head>
+
+<body id="pagekey__<%- appName %>__<%= pageBodyId(page.key) %>" class="<%= _envClass %><%- page.fullWidth && feature('exInnerWrapper') ? ' full-width' : '' %> <% if (page.minimalFooter) { %> enable-minimal-footer <% } %>">
+
+
+  <%- js('familysearch-s_code.js') %>
+  <% page.loadOmnitureInHead = true; %>
+
+  <!--[if lte IE 7]>
+    <div class="browser-upgrade alert alert-error">
+      <p><%- i18n('browser-upgrade', { 'strong_open': '<strong>', 'strong_close': '</strong>', 'link_open': '<a href="/browser-upgrade" class="btn btn-water btn-small">', 'link_close': '</a>' }) %></p>
+    </div>
+  <![endif]-->
+
+
+  <div id="wrapper" class="<%- !feature('exInnerWrapper') ? 'container' : '' %><%- page.fullWidth && !feature('exInnerWrapper') ? ' full-width' : '' %><%- page.bgDark ? ' bg-grey' : '' %>">
+
+    <% if (feature("newHeaderFooterEx")) { %>
+      <% include ./partials/header %>
+    <% } else { %>
+      <% include ../node_modules/theme-engage/views/partials/old_header %>
+    <% } %>
+
+    <% if( (feature("boomrRum")) ) { %>
+      <script>FS.rum.markUserTime("global.nav_end");</script>
+    <% } %>
+
+    <div data-ng-view="" class="app-<%- appName %>">
+      <% if (feature('exInnerWrapper')) { %>
+        <div class="wrapper container">
+       <% } %>
+        <% if(!ANGULAR) { %>
+          <%- body %>
+        <% } %>
+      </div>
+      <% if (feature('exInnerWrapper')) { %>
+        </div>
+      <% } %>
+
+    <div id="push"></div>
+  </div>
+
+  <% include ./partials/footer %>
+
+  <% if(SMITH) { %>
+
+    <%- js('theme-engage') %>
+    <%- js('vendor') %>
+    <%- js('app') %>
+
+  <% } else { %>
+
+    <%- include ../node_modules/theme-engage/views/partials/inject %>
+
+    <% if(assets.js) { %>
+      <% for(var i=0, l=assets.js.length; i<l; i++) { %>
+        <%- js(assets.js[i]) %>
+      <% } %>
+    <% } %>
+
+    <%- include ../node_modules/theme-engage/views/partials/analytics %>
+
+  <% } %>
+
+  <% if (feature("netPromoterEx")) { %>
+    <%- include ../node_modules/theme-engage/views/partials/net_promoter %>
+  <% } %>
+
+<% if(feature("appDynamicsEx")) { %>
+  <%- js('adrum.js') %>
+<% } %>
+<% if(feature("clickTaleHomeOnlyEx")){ %>
+  <script>
+  clickTaleBottom();
+  </script>
+  <% } %>
+
+ <% if( (feature("boomrRum")) ) { %>
+  <%- js('boomerang-rt-nt-0.9.1391719912.js') %>
+
+    <script>
+      //fire up BOOMR. Won't send until onload is fired.
+      ;(function () {
+        function sendBoomr() {
+          BOOMR.init({
+            beacon_url: "https://fs-client-logger.herokuapp.com/boomr"
+          });
+
+          //custom vars to add
+          BOOMR.addVar("app", "<%- appName %>");
+          BOOMR.addVar("pri", "<%- isLoggedIn %>");
+          //add pageName for easy url tagging. Reuse omnitoure pageName...
+          if (window.s && s.pageName) BOOMR.addVar("pName", s.pageName);
+
+
+          //collect user timing metrics and pass along to BOOMR
+           //abort if no window.perf
+          if (!window.performance || !window.performance.getEntriesByType) return;
+
+          var ut_marks = performance.getEntriesByType('mark');
+
+          //extract the data we care about from the perf metrics
+          for(var i=0; i<ut_marks.length; i++) {
+            var n = "ut." + ut_marks[i].name; //prefix everything with ut.
+            var t = Math.round(ut_marks[i].startTime);
+
+            //filter out values that are too low or too high (mainly IE9 problem)
+            if (t >= 0 && t < 3600000) {
+              BOOMR.plugins.RT.setTimer(n, t); //attach user timing metric to RT
+              BOOMR.addVar("featTime", t); //record the time the last feature fires
+            }
+          }
+
+          //count the custom timing marks. How many features on page?
+          //FIXME: this should be correlated with how many RT timers we set above...
+          BOOMR.addVar("featCount", ut_marks.length);
+
+        } //sendBoomr
+
+        //on load, fire the boomr package, so controls can send metric data as well...
+        if (window['addEventListener']) {
+          window.addEventListener('load', sendBoomr, false);
+        } else if (window['attachEvent']) {
+          window.attachEvent('onload', sendBoomr);
+        }
+      }()); //self executing anon function, so namespace won't be polluted
+    </script>
+
+
+  <% } %>
+
+</body>
+</html>

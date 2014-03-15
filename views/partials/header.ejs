@@ -1,0 +1,23 @@
+<div class="container">
+  <ul class="nav nav-pills" id="nav">
+    <% if(current_page === 'home') { %>
+      <li class="active">
+        <a href="/">Home</a>
+      </li>
+    <% } else { %>
+      <li><a href="/">Home</a></li>
+    <% } %>
+    <% if(current_page === 'static-1') { %>
+    <li class="active">
+      <a href="/static-1">Static Page 1</a>
+    </li>
+    <% } else { %>
+    <li><a href="/static-1">Static Page 1</a></li>
+    <% } %>
+    <% if(current_page === 'static-2') { %>
+      <li class="active"><a href="/static-2">Static Page 2</a></li>
+    <% } else { %>
+      <li><a href="/static-2">Static Page 2</a></li>
+    <% } %>
+  </ul>
+</div>

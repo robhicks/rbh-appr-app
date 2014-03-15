@@ -7,9 +7,9 @@ module.exports = function(app) {
   */
   
   app.get('/:page', function(req, res){
-    res.render(req.params.page, {});
+    res.render(req.params.page, {current_page: req.params.page});
   });
   app.get('/', function(req, res){
-    res.render("index", {});
+    res.render("index", {current_page: 'home', data: "some data passed in using res.locals"});
   });
-}
+};
